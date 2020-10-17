@@ -7,6 +7,6 @@ import (
 
 // Start starts the API server
 func Start() {
-	log.Println("Listening on 3000")
-	http.ListenAndServe(":3000", LoadRouter())
+	log.Println("Listening on 4000")
+	http.ListenAndServe(":4000", LoadRouter())
 }
