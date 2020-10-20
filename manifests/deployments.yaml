@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mars-viking
+  namespace: mars-viking
+  annotations:
+    fluxcd.io/tag.mars-viking: regex:^v\d+\.\d+\.\d+$
+    fluxcd.io/automated: "false"
+  labels:
+    app: mars-viking
+    release: mars-viking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mars-viking
+      release: mars-viking
+  template:
+    metadata:
+      annotations:
+        splunk.fluentbit.io: "true"
+        splunk.fluentbit.io/index: "mars-viking"
+      labels:
+        app: mars-viking
+        release: mars-viking
+    spec:
+      containers:
+      - name: mars-viking
+        image: jstone28/mars-viking:v0.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 4000
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: mars-viking-configmap
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 500Mi
+          requests:
+            cpu: "0.5"
+            memory: 500Mi
+...

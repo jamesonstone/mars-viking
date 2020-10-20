@@ -62,7 +62,3 @@ func readOpenAPI() {
 
 	fmt.Println(string(openAPISpec))
 }
-
-func postOpenAPISpec() {
-
-}

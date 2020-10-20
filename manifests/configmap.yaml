@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mars-viking-configmap
+  namespace: mars-viking
+data:
+  KEY: "value"
+...
